@@ -20,19 +20,20 @@ const quizQuestionsSet2 = [
             "55Java55",
             "Compilation error"
         ],
-        correctAnswer: 3, // D
+        correctAnswer: 1, // B
         marks: 2
     },
     {
-        question: "Q3. Which among the following are valid identifiers in Java?",
+        question: "Q3. Which among the following are valid identifiers in Java? (Select multiple)",
         options: [
             "_value and $sum",
             "9number and value#1",
             "Only _value",
             "All are valid"
         ],
-        correctAnswer: 2, // C
-        marks: 2
+        correctAnswer: [0, 2], // A and C
+        marks: 2,
+        multipleAnswers: true
     },
     {
         question: "Q4. What does the following code print?\nint a = 10;\nint b = 5;\nSystem.out.println(a > b ? a++ : ++b);\nSystem.out.println(a + \" \" + b);",
@@ -64,7 +65,7 @@ const quizQuestionsSet2 = [
             "java.lang.*",
             "java.net.*"
         ],
-        correctAnswer: 3, // D
+        correctAnswer: 1, // B
         marks: 2
     },
     {
@@ -86,7 +87,7 @@ const quizQuestionsSet2 = [
             "Writes data",
             "Writes objects"
         ],
-        correctAnswer: 2, // C
+        correctAnswer: 1, // B
         marks: 2
     },
     
@@ -100,19 +101,20 @@ const quizQuestionsSet2 = [
             "Compilation error",
             "Runtime error"
         ],
-        correctAnswer: 3, // D
+        correctAnswer: 1, // B
         marks: 2
     },
     {
-        question: "Q10. Which statements are true for inheritance?",
+        question: "Q10. Which statements are true for inheritance? (Select multiple)",
         options: [
-            "super() must be first in constructor & Constructors are not inherited",
-            "Private members are accessible & Final methods can be overridden",
-            "All statements are true",
-            "None are true"
+            "super() must be first in constructor",
+            "Private members are inherited but not accessible",
+            "Constructors are not inherited",
+            "Final methods can be overridden"
         ],
-        correctAnswer: 0, // A
-        marks: 2
+        correctAnswer: [0, 1, 2], // A, B, C
+        marks: 2,
+        multipleAnswers: true
     },
     {
         question: "Q11. Multiple inheritance in Java is achieved through:",
@@ -122,7 +124,7 @@ const quizQuestionsSet2 = [
             "Nested classes",
             "Method overloading"
         ],
-        correctAnswer: 2, // C
+        correctAnswer: 1, // B
         marks: 2
     },
     {
@@ -133,7 +135,7 @@ const quizQuestionsSet2 = [
             "super",
             "const"
         ],
-        correctAnswer: 3, // D
+        correctAnswer: 1, // B
         marks: 2
     },
     {
@@ -144,7 +146,7 @@ const quizQuestionsSet2 = [
             "Constructors execute alphabetically",
             "Depends on compiler"
         ],
-        correctAnswer: 0, // A
+        correctAnswer: 1, // B
         marks: 2
     },
     
@@ -157,7 +159,7 @@ const quizQuestionsSet2 = [
             "Checked exceptions must be declared or handled",
             "Unchecked exceptions must be declared"
         ],
-        correctAnswer: 1, // B
+        correctAnswer: 2, // C
         marks: 2
     },
     {
@@ -168,41 +170,42 @@ const quizQuestionsSet2 = [
             "Next",
             "Runtime error"
         ],
-        correctAnswer: 2, // C
+        correctAnswer: 0, // A (prints both)
         marks: 2
     },
     {
         question: "Q16. What is the output?\ntry {\n   int a[] = new int[2];\n   System.out.println(a[5]);\n} catch (ArrayIndexOutOfBoundsException e) {\n   System.out.println(\"Error\");\n}",
         options: [
-            "0",
             "Error",
+            "0",
             "Compilation error",
             "No output"
         ],
-        correctAnswer: 1, // B
+        correctAnswer: 0, // A
         marks: 2
     },
     {
-        question: "Q17. finally block executes â€”",
+        question: "Q17. finally block executes â€"",
         options: [
             "Only if exception is thrown",
             "Only if exception is not thrown",
             "Always",
             "Only on RuntimeException"
         ],
-        correctAnswer: 0, // A
+        correctAnswer: 2, // C
         marks: 2
     },
     {
-        question: "Q18. Which classes form the top of the exception hierarchy?",
+        question: "Q18. Which classes form the top of the exception hierarchy? (Select multiple)",
         options: [
-            "Throwable and Exception",
-            "Error and Runtime",
-            "Exception only",
-            "Throwable only"
+            "Throwable",
+            "Exception",
+            "Error",
+            "RuntimeException"
         ],
-        correctAnswer: 3, // D
-        marks: 2
+        correctAnswer: [0, 1, 2], // A, B, C
+        marks: 2,
+        multipleAnswers: true
     },
     
     // ðŸ§µ Threads (6 Qs)
@@ -236,7 +239,7 @@ const quizQuestionsSet2 = [
             "yield()",
             "stop()"
         ],
-        correctAnswer: 3, // D
+        correctAnswer: 1, // B
         marks: 2
     },
     {
@@ -258,7 +261,7 @@ const quizQuestionsSet2 = [
             "Prevent simultaneous access to shared resources",
             "Increase speed"
         ],
-        correctAnswer: 0, // A
+        correctAnswer: 2, // C
         marks: 2
     },
     {
@@ -269,7 +272,7 @@ const quizQuestionsSet2 = [
             "Waiting",
             "Terminated"
         ],
-        correctAnswer: 3, // D
+        correctAnswer: 0, // A
         marks: 2
     },
     
@@ -396,7 +399,7 @@ const quizQuestionsSet2 = [
             "DatagramSocket",
             "URLConnection"
         ],
-        correctAnswer: 3, // D
+        correctAnswer: 1, // B
         marks: 2
     },
     {
@@ -407,7 +410,7 @@ const quizQuestionsSet2 = [
             "java.sql",
             "java.util"
         ],
-        correctAnswer: 2, // C
+        correctAnswer: 0, // A
         marks: 2
     },
     {
@@ -418,7 +421,7 @@ const quizQuestionsSet2 = [
             "getIP()",
             "getAddress()"
         ],
-        correctAnswer: 3, // D
+        correctAnswer: 0, // A
         marks: 2
     },
     {
@@ -521,7 +524,7 @@ const quizQuestionsSet2 = [
             "XYZ",
             "ZYX"
         ],
-        correctAnswer: 2, // C
+        correctAnswer: 3, // D
         marks: 2
     },
     {
@@ -532,7 +535,7 @@ const quizQuestionsSet2 = [
             "false\ntrue",
             "false\nfalse"
         ],
-        correctAnswer: 3, // D
+        correctAnswer: 1, // B
         marks: 2
     },
     {
@@ -543,19 +546,20 @@ const quizQuestionsSet2 = [
             "false\ntrue",
             "false\nfalse"
         ],
-        correctAnswer: 1, // B
+        correctAnswer: 0, // A
         marks: 2
     },
     {
-        question: "Q49. Which modifiers can be applied to a class?",
+        question: "Q49. Which modifiers can be applied to a class? (Select multiple)",
         options: [
-            "public, abstract, and final",
-            "public and private only",
-            "abstract and final only",
-            "All modifiers"
+            "public",
+            "abstract",
+            "private",
+            "final"
         ],
-        correctAnswer: 0, // A
-        marks: 2
+        correctAnswer: [0, 1, 3], // A, B, D
+        marks: 2,
+        multipleAnswers: true
     },
     {
         question: "Q50. What is the output?\ntry {\n   System.out.println(\"Try\");\n   System.exit(0);\n} finally {\n   System.out.println(\"Finally\");\n}",
@@ -565,7 +569,7 @@ const quizQuestionsSet2 = [
             "Finally",
             "Compilation error"
         ],
-        correctAnswer: 2, // C
+        correctAnswer: 1, // B
         marks: 2
     }
 ];

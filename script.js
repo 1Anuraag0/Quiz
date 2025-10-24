@@ -142,21 +142,29 @@ class QuizApp {
                 const userAnswer = this.userAnswers[this.currentQuestionIndex];
                 const correctAnswer = question.correctAnswer;
                 
-                optionDiv.classList.add('disabled');
-                
-                if (index === userAnswer) {
+                if (question.multipleAnswers) {
+                    // Multiple answer handling
+                    if (Array.isArray(userAnswer) && userAnswer.includes(index)) {
+                        optionDiv.classList.add('selected');
+                    }
+                } else {
+                    // Single answer handling
+                    optionDiv.classList.add('disabled');
+                    
+                    if (index === userAnswer) {
+                        if (index === correctAnswer) {
+                            optionDiv.classList.add('correct');
+                        } else {
+                            optionDiv.classList.add('incorrect');
+                        }
+                    }
+                    
                     if (index === correctAnswer) {
                         optionDiv.classList.add('correct');
-                    } else {
-                        optionDiv.classList.add('incorrect');
                     }
                 }
-                
-                if (index === correctAnswer) {
-                    optionDiv.classList.add('correct');
-                }
             } else {
-                // Allow clicking only if not answered
+                // Allow clicking
                 optionDiv.addEventListener('click', () => this.selectAnswer(index));
             }
             
@@ -168,33 +176,58 @@ class QuizApp {
     }
 
     selectAnswer(answerIndex) {
-        // Prevent re-selection if already answered
-        if (this.userAnswers[this.currentQuestionIndex] !== null) {
-            return;
-        }
+        const question = this.questions[this.currentQuestionIndex];
         
-        this.userAnswers[this.currentQuestionIndex] = answerIndex;
-        const correctAnswer = this.questions[this.currentQuestionIndex].correctAnswer;
-        
-        // Update UI to show instant feedback
-        const options = this.answerOptions.querySelectorAll('.answer-option');
-        options.forEach((option, index) => {
-            option.classList.add('disabled'); // Disable further clicks
+        // Check if this is a multiple answer question
+        if (question.multipleAnswers) {
+            // Initialize array if first selection
+            if (this.userAnswers[this.currentQuestionIndex] === null) {
+                this.userAnswers[this.currentQuestionIndex] = [];
+            }
             
-            if (index === answerIndex) {
-                // Show user's selection
+            const userAnswers = this.userAnswers[this.currentQuestionIndex];
+            const answerIdx = userAnswers.indexOf(answerIndex);
+            
+            // Toggle selection
+            if (answerIdx > -1) {
+                userAnswers.splice(answerIdx, 1);
+            } else {
+                userAnswers.push(answerIndex);
+            }
+            
+            // Update UI for multiple selection
+            const options = this.answerOptions.querySelectorAll('.answer-option');
+            options[answerIndex].classList.toggle('selected');
+            
+        } else {
+            // Single answer question - prevent re-selection if already answered
+            if (this.userAnswers[this.currentQuestionIndex] !== null) {
+                return;
+            }
+            
+            this.userAnswers[this.currentQuestionIndex] = answerIndex;
+            const correctAnswer = question.correctAnswer;
+            
+            // Update UI to show instant feedback
+            const options = this.answerOptions.querySelectorAll('.answer-option');
+            options.forEach((option, index) => {
+                option.classList.add('disabled'); // Disable further clicks
+                
+                if (index === answerIndex) {
+                    // Show user's selection
+                    if (index === correctAnswer) {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('incorrect');
+                    }
+                }
+                
+                // Always highlight the correct answer
                 if (index === correctAnswer) {
                     option.classList.add('correct');
-                } else {
-                    option.classList.add('incorrect');
                 }
-            }
-            
-            // Always highlight the correct answer
-            if (index === correctAnswer) {
-                option.classList.add('correct');
-            }
-        });
+            });
+        }
     }
 
     previousQuestion() {
@@ -251,8 +284,25 @@ class QuizApp {
             const questionMarks = question.marks || 1; // Default to 1 mark if not specified
             this.totalMarks += questionMarks;
             
-            if (this.userAnswers[index] === question.correctAnswer) {
-                this.score += questionMarks;
+            const userAnswer = this.userAnswers[index];
+            const correctAnswer = question.correctAnswer;
+            
+            // Handle multiple answer questions
+            if (question.multipleAnswers && Array.isArray(correctAnswer)) {
+                if (Array.isArray(userAnswer)) {
+                    // Check if arrays match (same elements regardless of order)
+                    const sorted1 = [...userAnswer].sort();
+                    const sorted2 = [...correctAnswer].sort();
+                    if (sorted1.length === sorted2.length && 
+                        sorted1.every((val, idx) => val === sorted2[idx])) {
+                        this.score += questionMarks;
+                    }
+                }
+            } else {
+                // Single answer question
+                if (userAnswer === correctAnswer) {
+                    this.score += questionMarks;
+                }
             }
         });
     }

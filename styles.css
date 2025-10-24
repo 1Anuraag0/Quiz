@@ -239,6 +239,12 @@ body {
     background: #eef2ff;
 }
 
+.answer-option.selected {
+    border-color: var(--primary-color);
+    background: #dbeafe;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
 .answer-option.correct {
     border-color: var(--success-color);
     background: #d1fae5;
