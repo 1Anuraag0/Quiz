@@ -1,6 +1,6 @@
-// Java Quiz Questions Database - Set 1
+// Java Quiz Questions Database - Set 1 (Total: 100 marks)
 const quizQuestionsSet1 = [
-    // Week 1–2: Java Basics & OOP Concepts
+    // Week 1–2: Java Basics & OOP Concepts (1 mark each - basic concepts)
     {
         question: "Q1. Java is a:",
         options: [
@@ -9,7 +9,8 @@ const quizQuestionsSet1 = [
             "Both compiled and interpreted",
             "Assembled language"
         ],
-        correctAnswer: 1 // B
+        correctAnswer: 2, // C
+        marks: 1
     },
     {
         question: "Q2. Which of the following is not a Java feature?",
@@ -19,7 +20,8 @@ const quizQuestionsSet1 = [
             "Pointer arithmetic",
             "Robust"
         ],
-        correctAnswer: 2 // C
+        correctAnswer: 2, // C
+        marks: 1
     },
     {
         question: "Q3. Which of the following data types has the highest precision?",
@@ -29,7 +31,8 @@ const quizQuestionsSet1 = [
             "double",
             "long"
         ],
-        correctAnswer: 0 // A
+        correctAnswer: 2, // C
+        marks: 1
     },
     {
         question: "Q4. What is the output?\nSystem.out.println(10 + 20 + \"Java\" + 10 + 20);",
@@ -39,7 +42,8 @@ const quizQuestionsSet1 = [
             "1020Java1020",
             "Compilation error"
         ],
-        correctAnswer: 1 // B
+        correctAnswer: 1, // B
+        marks: 2
     },
     {
         question: "Q5. Identify the incorrect variable declaration:",
@@ -49,7 +53,8 @@ const quizQuestionsSet1 = [
             "char 1ch = 'A';",
             "boolean flag = true;"
         ],
-        correctAnswer: 3 // D
+        correctAnswer: 2, // C
+        marks: 1
     },
     {
         question: "Q6. What is the output of:\nint a = 5;\nSystem.out.println(++a * 2 + a++);",
@@ -57,9 +62,10 @@ const quizQuestionsSet1 = [
             "12",
             "13",
             "14",
-            "16"
+            "18"
         ],
-        correctAnswer: 0 // A
+        correctAnswer: 3, // D (18 = 6*2 + 6)
+        marks: 2
     },
     {
         question: "Q7. Which statement best defines encapsulation?",
@@ -69,10 +75,11 @@ const quizQuestionsSet1 = [
             "Defining multiple methods with the same name",
             "Implementing multiple interfaces"
         ],
-        correctAnswer: 2 // C
+        correctAnswer: 0, // A
+        marks: 2
     },
     
-    // Week 3: I/O Handling
+    // Week 3: I/O Handling (2 marks each - practical concepts)
     {
         question: "Q8. Which class allows reading text efficiently from a file?",
         options: [
@@ -81,7 +88,8 @@ const quizQuestionsSet1 = [
             "InputStreamReader",
             "Scanner"
         ],
-        correctAnswer: 3 // D
+        correctAnswer: 1, // B
+        marks: 2
     },
     {
         question: "Q9. To write text to a file, we use:",
@@ -91,7 +99,8 @@ const quizQuestionsSet1 = [
             "FileWriter",
             "DataInputStream"
         ],
-        correctAnswer: 0 // A
+        correctAnswer: 2, // C
+        marks: 2
     },
     {
         question: "Q10. Which of the following must be closed explicitly to release file resources?",
@@ -101,10 +110,11 @@ const quizQuestionsSet1 = [
             "FileReader",
             "All of these"
         ],
-        correctAnswer: 2 // C
+        correctAnswer: 3, // D
+        marks: 2
     },
     
-    // Week 4–5: Encapsulation & Inheritance
+    // Week 4–5: Encapsulation & Inheritance (2 marks each - OOP concepts)
     {
         question: "Q11. What will be the output?\nclass A { int x = 10; }\nclass B extends A {\n   int x = 20;\n   void show() { System.out.println(super.x); }\n   public static void main(String[] args) { new B().show(); }\n}",
         options: [
@@ -113,7 +123,8 @@ const quizQuestionsSet1 = [
             "0",
             "Compilation error"
         ],
-        correctAnswer: 3 // D
+        correctAnswer: 0, // A
+        marks: 2
     },
     {
         question: "Q12. What is true about inheritance in Java?",
@@ -123,7 +134,8 @@ const quizQuestionsSet1 = [
             "A subclass inherits all non-private members",
             "The super keyword is used to call subclass methods"
         ],
-        correctAnswer: 1 // B
+        correctAnswer: 2, // C
+        marks: 2
     },
     {
         question: "Q13. Constructor overloading means:",
@@ -133,7 +145,8 @@ const quizQuestionsSet1 = [
             "Using constructors with super()",
             "Having private constructors"
         ],
-        correctAnswer: 0 // A
+        correctAnswer: 0, // A
+        marks: 2
     },
     
     // Week 6: Exception Handling
@@ -145,7 +158,8 @@ const quizQuestionsSet1 = [
             "IOException is unchecked",
             "All of the above"
         ],
-        correctAnswer: 3 // D
+        correctAnswer: 0, // A (A,B both inherit from Throwable)
+        marks: 2
     },
     {
         question: "Q15. Output of:\ntry {\n   int x = 5 / 0;\n} catch (ArithmeticException e) {\n   System.out.print(\"Error \");\n} finally {\n   System.out.print(\"Done\");\n}",
@@ -155,7 +169,8 @@ const quizQuestionsSet1 = [
             "Error Done",
             "Compilation error"
         ],
-        correctAnswer: 2 // C
+        correctAnswer: 2, // C
+        marks: 2
     },
     {
         question: "Q16. Which block executes regardless of exception occurrence?",
@@ -165,7 +180,8 @@ const quizQuestionsSet1 = [
             "finally",
             "throw"
         ],
-        correctAnswer: 2 // C
+        correctAnswer: 2, // C
+        marks: 2
     },
     
     // Week 7: Multithreading
@@ -177,7 +193,8 @@ const quizQuestionsSet1 = [
             "yield()",
             "All of the above"
         ],
-        correctAnswer: 0 // A
+        correctAnswer: 3, // D (All are valid)
+        marks: 2
     },
     {
         question: "Q18. What is the output?\nThread t = new Thread();\nt.start();\nt.start();",
@@ -187,7 +204,8 @@ const quizQuestionsSet1 = [
             "Throws IllegalThreadStateException",
             "No output"
         ],
-        correctAnswer: 1 // B
+        correctAnswer: 2, // C
+        marks: 2
     },
     {
         question: "Q19. Which keyword is used to prevent concurrent access by multiple threads?",
@@ -197,7 +215,8 @@ const quizQuestionsSet1 = [
             "volatile",
             "static"
         ],
-        correctAnswer: 3 // D
+        correctAnswer: 1, // B
+        marks: 2
     },
     
     // Week 8: Applets & Servlets
@@ -209,7 +228,8 @@ const quizQuestionsSet1 = [
             "run()",
             "paint()"
         ],
-        correctAnswer: 2 // C
+        correctAnswer: 2, // C
+        marks: 2
     },
     {
         question: "Q21. A servlet runs on:",
@@ -219,7 +239,8 @@ const quizQuestionsSet1 = [
             "JVM only",
             "Application client"
         ],
-        correctAnswer: 1 // B
+        correctAnswer: 1, // B
+        marks: 2
     },
     {
         question: "Q22. In Applet, which method is called when the applet is first loaded?",
@@ -229,7 +250,8 @@ const quizQuestionsSet1 = [
             "stop()",
             "destroy()"
         ],
-        correctAnswer: 2 // C
+        correctAnswer: 1, // B
+        marks: 2
     },
     
     // Week 9: Swing & AWT
@@ -241,7 +263,8 @@ const quizQuestionsSet1 = [
             "Frame",
             "Label"
         ],
-        correctAnswer: 0 // A
+        correctAnswer: 2, // C
+        marks: 2
     },
     {
         question: "Q24. Swing components start with:",
@@ -251,7 +274,8 @@ const quizQuestionsSet1 = [
             "A",
             "None"
         ],
-        correctAnswer: 3 // D
+        correctAnswer: 0, // A
+        marks: 2
     },
     {
         question: "Q25. Which layout manager divides the container into five regions?",
@@ -261,7 +285,8 @@ const quizQuestionsSet1 = [
             "GridLayout",
             "CardLayout"
         ],
-        correctAnswer: 1 // B
+        correctAnswer: 1, // B
+        marks: 2
     },
     {
         question: "Q26. Output of:\nJButton b = new JButton(\"Click\");\nb.setText(\"Press\");\nSystem.out.println(b.getText());",
@@ -271,7 +296,8 @@ const quizQuestionsSet1 = [
             "Null",
             "Compilation error"
         ],
-        correctAnswer: 3 // D
+        correctAnswer: 1, // B
+        marks: 2
     },
     
     // Week 10: Networking
@@ -283,7 +309,8 @@ const quizQuestionsSet1 = [
             "DatagramSocket",
             "URL"
         ],
-        correctAnswer: 0 // A
+        correctAnswer: 0, // A
+        marks: 2
     },
     {
         question: "Q28. Which package contains networking classes?",
@@ -293,7 +320,8 @@ const quizQuestionsSet1 = [
             "java.lang",
             "java.util"
         ],
-        correctAnswer: 2 // C
+        correctAnswer: 1, // B
+        marks: 2
     },
     {
         question: "Q29. What does InetAddress.getLocalHost() return?",
@@ -303,7 +331,8 @@ const quizQuestionsSet1 = [
             "Name of DNS",
             "None"
         ],
-        correctAnswer: 1 // B
+        correctAnswer: 0, // A
+        marks: 2
     },
     
     // Week 11: JDBC / ODBC
@@ -315,7 +344,8 @@ const quizQuestionsSet1 = [
             "java.db",
             "java.jdbc"
         ],
-        correctAnswer: 3 // D
+        correctAnswer: 0, // A
+        marks: 2
     },
     {
         question: "Q31. Correct order of JDBC steps:\n1. Register driver\n2. Create Statement\n3. Establish Connection\n4. Execute Query\n5. Close Connection\nCorrect order: ?",
@@ -325,7 +355,8 @@ const quizQuestionsSet1 = [
             "1-3-4-2-5",
             "3-1-2-4-5"
         ],
-        correctAnswer: 2 // C
+        correctAnswer: 1, // B (1-3-2-4-5)
+        marks: 2
     },
     {
         question: "Q32. Which method is used to execute SELECT query?",
@@ -335,7 +366,8 @@ const quizQuestionsSet1 = [
             "execute()",
             "executeSelect()"
         ],
-        correctAnswer: 0 // A
+        correctAnswer: 0, // A
+        marks: 2
     },
     {
         question: "Q33. What is returned by executeQuery()?",
@@ -345,7 +377,8 @@ const quizQuestionsSet1 = [
             "ResultSet",
             "void"
         ],
-        correctAnswer: 3 // D
+        correctAnswer: 2, // C
+        marks: 2
     },
     
     // Week 12: Interfaces & Packages
@@ -357,7 +390,8 @@ const quizQuestionsSet1 = [
             "import",
             "interface"
         ],
-        correctAnswer: 1 // B
+        correctAnswer: 1, // B
+        marks: 2
     },
     {
         question: "Q35. Which statement is true?",
@@ -367,7 +401,8 @@ const quizQuestionsSet1 = [
             "Interface can extend a class",
             "Interface methods are private"
         ],
-        correctAnswer: 0 // A
+        correctAnswer: 1, // B
+        marks: 2
     },
     {
         question: "Q36. Output:\ninterface A { int x = 10; }\nclass Test implements A {\n   public static void main(String[] args) {\n      System.out.println(x);\n   }\n}",
@@ -377,7 +412,8 @@ const quizQuestionsSet1 = [
             "Compilation error",
             "Runtime error"
         ],
-        correctAnswer: 2 // C
+        correctAnswer: 1, // B
+        marks: 2
     },
     {
         question: "Q37. Packages are used to:",
@@ -387,7 +423,8 @@ const quizQuestionsSet1 = [
             "Perform I/O operations",
             "Create threads"
         ],
-        correctAnswer: 3 // D
+        correctAnswer: 0, // A
+        marks: 2
     },
     
     // Integrated (Mixed Logic / Output)
@@ -399,7 +436,8 @@ const quizQuestionsSet1 = [
             "ABC",
             "CBA"
         ],
-        correctAnswer: 0 // A
+        correctAnswer: 0, // A
+        marks: 2
     },
     {
         question: "Q39. Output:\ntry {\n   int[] arr = new int[3];\n   arr[5] = 10;\n} catch (ArrayIndexOutOfBoundsException e) {\n   System.out.println(\"Array\");\n} catch (Exception e) {\n   System.out.println(\"Exception\");\n}",
@@ -409,7 +447,8 @@ const quizQuestionsSet1 = [
             "Compilation error",
             "No output"
         ],
-        correctAnswer: 1 // B
+        correctAnswer: 1, // B
+        marks: 2
     },
     {
         question: "Q40. Output:\nclass Parent { void show() { System.out.println(\"Parent\"); } }\nclass Child extends Parent {\n   void show() { System.out.println(\"Child\"); }\n   public static void main(String[] args) {\n      Parent p = new Child();\n      p.show();\n   }\n}",
@@ -419,7 +458,8 @@ const quizQuestionsSet1 = [
             "Compilation error",
             "Runtime error"
         ],
-        correctAnswer: 2 // C
+        correctAnswer: 1, // B (Child - runtime polymorphism)
+        marks: 2
     },
     {
         question: "Q41. In multithreading, which method causes a thread to move to waiting state?",
@@ -429,7 +469,8 @@ const quizQuestionsSet1 = [
             "yield()",
             "suspend()"
         ],
-        correctAnswer: 0 // A
+        correctAnswer: 0, // A
+        marks: 2
     },
     {
         question: "Q42. Which Java feature allows same method name but different parameters?",
@@ -439,7 +480,8 @@ const quizQuestionsSet1 = [
             "Encapsulation",
             "Abstraction"
         ],
-        correctAnswer: 3 // D
+        correctAnswer: 1, // B
+        marks: 2
     },
     {
         question: "Q43. Which of the following are access modifiers in Java?",
@@ -447,9 +489,10 @@ const quizQuestionsSet1 = [
             "private and protected",
             "static",
             "public",
-            "All of the above"
+            "private, protected, and public"
         ],
-        correctAnswer: 2 // C
+        correctAnswer: 3, // D (A,B,D are access modifiers)
+        marks: 2
     },
     {
         question: "Q44. Which keyword is used to prevent inheritance?",
@@ -459,7 +502,8 @@ const quizQuestionsSet1 = [
             "final",
             "const"
         ],
-        correctAnswer: 1 // B
+        correctAnswer: 2, // C
+        marks: 2
     },
     {
         question: "Q45. What is printed?\nString s1 = \"Java\";\nString s2 = new String(\"Java\");\nSystem.out.println(s1 == s2);",
@@ -469,6 +513,8 @@ const quizQuestionsSet1 = [
             "Compilation error",
             "Null"
         ],
-        correctAnswer: 0 // A
+        correctAnswer: 1, // B
+        marks: 2
     }
 ];
+

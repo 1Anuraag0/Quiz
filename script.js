@@ -70,13 +70,16 @@ class QuizApp {
         this.currentSet = setName;
         this.questions = this.allQuestionSets[setName];
         
+        // Calculate total marks for the set
+        const totalMarks = this.questions.reduce((sum, q) => sum + (q.marks || 1), 0);
+        
         // Update welcome screen based on selected set
         if (setName === 'set1') {
             this.welcomeTitle.textContent = 'Java Quiz - Set 1';
-            this.welcomeDescription.textContent = 'Java Basics & OOP Concepts (45 Questions)';
+            this.welcomeDescription.textContent = `Java Basics & OOP Concepts\n45 Questions | Total: ${totalMarks} Marks`;
         } else {
             this.welcomeTitle.textContent = 'Java Quiz - Set 2';
-            this.welcomeDescription.textContent = 'Comprehensive Java Assessment (50 Questions)';
+            this.welcomeDescription.textContent = `Comprehensive Java Assessment\n50 Questions | Total: ${totalMarks} Marks`;
         }
         
         this.showScreen(this.welcomeScreen);
@@ -242,9 +245,14 @@ class QuizApp {
 
     calculateScore() {
         this.score = 0;
+        this.totalMarks = 0;
+        
         this.questions.forEach((question, index) => {
+            const questionMarks = question.marks || 1; // Default to 1 mark if not specified
+            this.totalMarks += questionMarks;
+            
             if (this.userAnswers[index] === question.correctAnswer) {
-                this.score++;
+                this.score += questionMarks;
             }
         });
     }
@@ -252,21 +260,23 @@ class QuizApp {
     displayResults() {
         this.showScreen(this.resultsScreen);
         
-        // Calculate percentage
-        const percentage = Math.round((this.score / this.questions.length) * 100);
+        // Calculate percentage based on marks
+        const percentage = Math.round((this.score / this.totalMarks) * 100);
         this.scorePercentage.textContent = `${percentage}%`;
-        this.scoreText.textContent = `Your Score: ${this.score}/${this.questions.length}`;
+        this.scoreText.textContent = `Your Score: ${this.score}/${this.totalMarks} marks`;
         
         // Performance message
         let message = '';
         if (percentage >= 90) {
             message = 'Outstanding! You\'re a quiz master! 🌟';
-        } else if (percentage >= 70) {
-            message = 'Great job! You did really well! 🎉';
-        } else if (percentage >= 50) {
-            message = 'Good effort! Keep practicing! 👍';
+        } else if (percentage >= 75) {
+            message = 'Excellent! Great performance! 🎉';
+        } else if (percentage >= 60) {
+            message = 'Good job! Well done! 👍';
+        } else if (percentage >= 40) {
+            message = 'Fair attempt! Keep practicing! �';
         } else {
-            message = 'Don\'t give up! Try again! 💪';
+            message = 'Don\'t give up! Study and try again! 💪';
         }
         this.performanceMessage.textContent = message;
         
@@ -282,15 +292,19 @@ class QuizApp {
             resultItem.className = 'result-item';
             
             const isCorrect = this.userAnswers[index] === question.correctAnswer;
+            const questionMarks = question.marks || 1;
             resultItem.classList.add(isCorrect ? 'correct' : 'incorrect');
             
             const userAnswerText = this.userAnswers[index] !== null 
                 ? question.options[this.userAnswers[index]] 
                 : 'Not answered';
             
+            const marksAwarded = isCorrect ? questionMarks : 0;
+            
             resultItem.innerHTML = `
-                <h4>Question ${index + 1}</h4>
+                <h4>Question ${index + 1} <span class="question-marks">[${questionMarks} mark${questionMarks > 1 ? 's' : ''}]</span></h4>
                 <p><strong>${question.question}</strong></p>
+                <p class="marks-info">${isCorrect ? `✓ Earned: ${marksAwarded}/${questionMarks} marks` : `✗ Earned: 0/${questionMarks} marks`}</p>
                 <p class="correct-answer">✓ Correct Answer: ${question.options[question.correctAnswer]}</p>
                 ${!isCorrect ? `<p class="your-answer">✗ Your Answer: ${userAnswerText}</p>` : ''}
             `;

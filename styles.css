@@ -372,6 +372,21 @@ body {
     font-weight: 600;
 }
 
+.question-marks {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    font-weight: normal;
+}
+
+.marks-info {
+    font-weight: 600;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    background: #f3f4f6;
+    border-radius: 5px;
+    display: inline-block;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
