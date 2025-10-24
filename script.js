@@ -333,6 +333,11 @@ class QuizApp {
             this.answerOptions.appendChild(optionDiv);
         });
         
+        // Show explanation if question was already answered
+        if (isAnswered && !question.multipleAnswers) {
+            this.showExplanation();
+        }
+        
         // Update navigation buttons
         this.updateNavigationButtons();
     }
@@ -414,6 +419,37 @@ class QuizApp {
                     option.classList.add('correct');
                 }
             });
+            
+            // Show explanation
+            this.showExplanation();
+        }
+    }
+    
+    showExplanation() {
+        const question = this.questions[this.currentQuestionIndex];
+        
+        // Remove any existing explanation
+        const existingExplanation = document.querySelector('.question-explanation');
+        if (existingExplanation) {
+            existingExplanation.remove();
+        }
+        
+        // Only show if explanation exists
+        if (question.explanation) {
+            const explanationDiv = document.createElement('div');
+            explanationDiv.className = 'question-explanation';
+            explanationDiv.innerHTML = `
+                <div class="explanation-icon">💡</div>
+                <div class="explanation-text">${question.explanation}</div>
+            `;
+            
+            // Insert after answer options
+            this.answerOptions.parentNode.insertBefore(explanationDiv, this.answerOptions.nextSibling);
+            
+            // Add show class for animation
+            setTimeout(() => {
+                explanationDiv.classList.add('show');
+            }, 10);
         }
     }
     

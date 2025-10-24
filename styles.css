@@ -262,6 +262,39 @@ body {
     pointer-events: none;
 }
 
+/* Explanation Styles */
+.question-explanation {
+    margin-top: 25px;
+    padding: 20px;
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border: 2px solid #fbbf24;
+    border-radius: 12px;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.4s ease;
+}
+
+.question-explanation.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.explanation-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.explanation-text {
+    flex: 1;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #78350f;
+}
+
 @keyframes correctPulse {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.02); box-shadow: 0 0 20px rgba(16, 185, 129, 0.5); }

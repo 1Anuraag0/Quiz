@@ -2,7 +2,7 @@
 const quizQuestionsSet2 = [
     // ðŸŸ¦ Weeks 1â€“4 (Basics, I/O, Encapsulation â€“ 8 Qs)
     {
-        question: "Q1. Java achieves platform independence through â€”",
+        question: "Q1. Java achieves platform independence through -",
         options: [
             "Bytecode and JVM",
             "Compiler optimization",
@@ -10,7 +10,8 @@ const quizQuestionsSet2 = [
             "Dynamic binding"
         ],
         correctAnswer: 0, // A
-        marks: 2
+        marks: 2,
+        explanation: "Java code is compiled into bytecode, which is then interpreted by the JVM (Java Virtual Machine), making it platform-independent."
     },
     {
         question: "Q2. What is the output?\nSystem.out.println(5 + 5 + \"Java\" + 5 + 5);",
@@ -21,19 +22,21 @@ const quizQuestionsSet2 = [
             "Compilation error"
         ],
         correctAnswer: 1, // B
-        marks: 2
+        marks: 2,
+        explanation: "5+5=10, then string concatenation occurs: 10+\"Java\" becomes \"10Java\", then +5+5 are concatenated as strings, resulting in \"10Java55\"."
     },
     {
         question: "Q3. Which among the following are valid identifiers in Java? (Select multiple)",
         options: [
-            "_value and $sum",
-            "9number and value#1",
-            "Only _value",
-            "All are valid"
+            "_value (valid)",
+            "9number (invalid - starts with digit)",
+            "$sum (valid)",
+            "value#1 (invalid - contains #)"
         ],
         correctAnswer: [0, 2], // A and C
         marks: 2,
-        multipleAnswers: true
+        multipleAnswers: true,
+        explanation: "_value and $sum are valid because identifiers can start with _ or $. 9number is invalid (starts with digit) and value#1 is invalid (contains #)."
     },
     {
         question: "Q4. What does the following code print?\nint a = 10;\nint b = 5;\nSystem.out.println(a > b ? a++ : ++b);\nSystem.out.println(a + \" \" + b);",
@@ -44,7 +47,8 @@ const quizQuestionsSet2 = [
             "10\n11 6"
         ],
         correctAnswer: 0, // A
-        marks: 2
+        marks: 2,
+        explanation: "Ternary returns 10 (a++ uses post-increment), then a becomes 11. Second line prints '11 5'."
     },
     {
         question: "Q5. Encapsulation is violated when:",
@@ -55,7 +59,8 @@ const quizQuestionsSet2 = [
             "Variables are hidden within a class"
         ],
         correctAnswer: 1, // B
-        marks: 2
+        marks: 2,
+        explanation: "Encapsulation is broken when data is directly accessed by outside classes without proper access control methods."
     },
     {
         question: "Q6. Scanner sc = new Scanner(System.in);\nint a = sc.nextInt();\nWhich package must be imported?",
@@ -66,10 +71,11 @@ const quizQuestionsSet2 = [
             "java.net.*"
         ],
         correctAnswer: 1, // B
-        marks: 2
+        marks: 2,
+        explanation: "Scanner class is located in java.util package."
     },
     {
-        question: "Q7. System.in and System.out are â€”",
+        question: "Q7. System.in and System.out are -",
         options: [
             "Variables",
             "Streams",
@@ -77,7 +83,8 @@ const quizQuestionsSet2 = [
             "Interfaces"
         ],
         correctAnswer: 1, // B
-        marks: 2
+        marks: 2,
+        explanation: "System.in and System.out are I/O streams used for input and output operations."
     },
     {
         question: "Q8. Which statement about FileReader is correct?",
@@ -88,7 +95,8 @@ const quizQuestionsSet2 = [
             "Writes objects"
         ],
         correctAnswer: 1, // B
-        marks: 2
+        marks: 2,
+        explanation: "FileReader is used to read character data from files."
     },
     
     // ðŸŸ© Weeks 5â€“10 (OOP â†’ Networking â€“ 35 Qs)
@@ -102,7 +110,8 @@ const quizQuestionsSet2 = [
             "Runtime error"
         ],
         correctAnswer: 1, // B
-        marks: 2
+        marks: 2,
+        explanation: "B overrides A's msg() method. Runtime polymorphism causes B's version to execute, printing 'B'."
     },
     {
         question: "Q10. Which statements are true for inheritance? (Select multiple)",
@@ -114,7 +123,8 @@ const quizQuestionsSet2 = [
         ],
         correctAnswer: [0, 1, 2], // A, B, C
         marks: 2,
-        multipleAnswers: true
+        multipleAnswers: true,
+        explanation: "super() must be first ✓, private members are inherited but inaccessible ✓, constructors are not inherited ✓. Final methods cannot be overridden ✗."
     },
     {
         question: "Q11. Multiple inheritance in Java is achieved through:",
@@ -125,7 +135,8 @@ const quizQuestionsSet2 = [
             "Method overloading"
         ],
         correctAnswer: 1, // B
-        marks: 2
+        marks: 2,
+        explanation: "Java supports multiple inheritance only through interfaces, not classes."
     },
     {
         question: "Q12. Which keyword restricts inheritance of a class?",
@@ -136,7 +147,8 @@ const quizQuestionsSet2 = [
             "const"
         ],
         correctAnswer: 1, // B
-        marks: 2
+        marks: 2,
+        explanation: "The 'final' keyword prevents a class from being inherited."
     },
     {
         question: "Q13. Which of the following is true?",
@@ -147,7 +159,8 @@ const quizQuestionsSet2 = [
             "Depends on compiler"
         ],
         correctAnswer: 1, // B
-        marks: 2
+        marks: 2,
+        explanation: "Superclass constructor always executes first (via implicit or explicit super() call)."
     },
     
     // âš ï¸ Exception Handling (5 Qs)
@@ -160,18 +173,20 @@ const quizQuestionsSet2 = [
             "Unchecked exceptions must be declared"
         ],
         correctAnswer: 2, // C
-        marks: 2
+        marks: 2,
+        explanation: "Checked exceptions must be declared with throws or handled with try-catch at compile time."
     },
     {
         question: "Q15. What is the output?\ntry {\n   int a = 10 / 0;\n} catch (Exception e) {\n   System.out.println(\"Exception\");\n}\nSystem.out.println(\"Next\");",
         options: [
-            "Exception",
             "Exception\nNext",
+            "Exception",
             "Next",
             "Runtime error"
         ],
-        correctAnswer: 0, // A (prints both)
-        marks: 2
+        correctAnswer: 0, // A
+        marks: 2,
+        explanation: "Exception is caught and handled, so it prints 'Exception', then execution continues and prints 'Next'."
     },
     {
         question: "Q16. What is the output?\ntry {\n   int a[] = new int[2];\n   System.out.println(a[5]);\n} catch (ArrayIndexOutOfBoundsException e) {\n   System.out.println(\"Error\");\n}",
@@ -182,7 +197,8 @@ const quizQuestionsSet2 = [
             "No output"
         ],
         correctAnswer: 0, // A
-        marks: 2
+        marks: 2,
+        explanation: "ArrayIndexOutOfBoundsException is caught and the catch block prints 'Error'."
     },
     {
         question: "Q17. finally block executes -",
@@ -193,7 +209,8 @@ const quizQuestionsSet2 = [
             "Only on RuntimeException"
         ],
         correctAnswer: 2, // C
-        marks: 2
+        marks: 2,
+        explanation: "The finally block always executes, regardless of whether an exception occurs or not."
     },
     {
         question: "Q18. Which classes form the top of the exception hierarchy? (Select multiple)",
@@ -205,7 +222,8 @@ const quizQuestionsSet2 = [
         ],
         correctAnswer: [0, 1, 2], // A, B, C
         marks: 2,
-        multipleAnswers: true
+        multipleAnswers: true,
+        explanation: "Throwable is the root. Exception and Error are direct subclasses of Throwable, forming the top of the hierarchy."
     },
     
     // ðŸ§µ Threads (6 Qs)
@@ -218,7 +236,8 @@ const quizQuestionsSet2 = [
             "4"
         ],
         correctAnswer: 1, // B
-        marks: 2
+        marks: 2,
+        explanation: "Two ways: extend Thread class or implement Runnable interface."
     },
     {
         question: "Q20. What happens when you call start() twice?\nclass MyThread extends Thread {\n   public void run() { System.out.println(\"Run\"); }\n   public static void main(String[] args) {\n       MyThread t = new MyThread();\n       t.start();\n       t.start();\n   }\n}",
@@ -228,8 +247,9 @@ const quizQuestionsSet2 = [
             "Compilation error",
             "Prints Run once"
         ],
-        correctAnswer: 2, // C
-        marks: 2
+        correctAnswer: 1, // B
+        marks: 2,
+        explanation: "Calling start() twice throws IllegalThreadStateException because a thread cannot be started more than once."
     },
     {
         question: "Q21. Which method suspends thread execution for a specific time?",
@@ -240,7 +260,8 @@ const quizQuestionsSet2 = [
             "stop()"
         ],
         correctAnswer: 1, // B
-        marks: 2
+        marks: 2,
+        explanation: "sleep() suspends thread execution for the specified number of milliseconds."
     },
     {
         question: "Q22. Which of the following is true about run() and start()?",
@@ -251,7 +272,8 @@ const quizQuestionsSet2 = [
             "Both create new threads"
         ],
         correctAnswer: 2, // C
-        marks: 2
+        marks: 2,
+        explanation: "start() creates a new thread and internally calls the run() method in that new thread."
     },
     {
         question: "Q23. What is synchronization used for?",
@@ -262,7 +284,8 @@ const quizQuestionsSet2 = [
             "Increase speed"
         ],
         correctAnswer: 2, // C
-        marks: 2
+        marks: 2,
+        explanation: "Synchronization prevents multiple threads from accessing shared resources simultaneously, avoiding data inconsistency."
     },
     {
         question: "Q24. Which state comes immediately after start()?",
@@ -273,12 +296,13 @@ const quizQuestionsSet2 = [
             "Terminated"
         ],
         correctAnswer: 0, // A
-        marks: 2
+        marks: 2,
+        explanation: "After start() is called, the thread enters the Ready (Runnable) state and waits for CPU time from the scheduler."
     },
     
     // ðŸŽ¨ Applets & Servlets (5 Qs)
     {
-        question: "Q25. Applets run inside â€”",
+        question: "Q25. Applets run inside -",
         options: [
             "JVM only",
             "Web browser",
@@ -286,7 +310,8 @@ const quizQuestionsSet2 = [
             "Command line"
         ],
         correctAnswer: 1, // B
-        marks: 2
+        marks: 2,
+        explanation: "Applets are small Java programs designed to run inside a web browser."
     },
     {
         question: "Q26. Which method is called when applet is first loaded?",
@@ -296,30 +321,33 @@ const quizQuestionsSet2 = [
             "run()",
             "paint()"
         ],
-        correctAnswer: 2, // C
-        marks: 2
+        correctAnswer: 1, // B
+        marks: 2,
+        explanation: "init() is called once when the applet is first loaded to perform initialization."
     },
     {
-        question: "Q27. The paint(Graphics g) method is used to â€”",
+        question: "Q27. The paint(Graphics g) method is used to -",
         options: [
             "Initialize applet",
             "Draw output",
             "Handle input",
             "Restart the applet"
         ],
-        correctAnswer: 3, // D
-        marks: 2
+        correctAnswer: 1, // B
+        marks: 2,
+        explanation: "paint() is used to draw graphics and text output on the applet."
     },
     {
-        question: "Q28. Servlets are used to â€”",
+        question: "Q28. Servlets are used to -",
         options: [
             "Handle client-side GUI",
             "Handle server-side requests",
             "Render HTML pages locally",
             "Compile JSP files"
         ],
-        correctAnswer: 0, // A
-        marks: 2
+        correctAnswer: 1, // B
+        marks: 2,
+        explanation: "Servlets handle server-side requests and generate dynamic responses."
     },
     {
         question: "Q29. Which package provides Applet classes?",
@@ -329,21 +357,23 @@ const quizQuestionsSet2 = [
             "java.swing.*",
             "javax.servlet.*"
         ],
-        correctAnswer: 2, // C
-        marks: 2
+        correctAnswer: 1, // B
+        marks: 2,
+        explanation: "The java.applet.* package provides the Applet class and related functionality."
     },
     
     // ðŸ’» Swing & AWT (5 Qs)
     {
-        question: "Q30. Swing is based on â€”",
+        question: "Q30. Swing is based on -",
         options: [
             "AWT (lightweight components)",
             "Native OS calls",
             "Applet API",
             "JVM execution stack"
         ],
-        correctAnswer: 1, // B
-        marks: 2
+        correctAnswer: 0, // A
+        marks: 2,
+        explanation: "Swing is built on top of AWT but provides lightweight components that are purely Java-based."
     },
     {
         question: "Q31. Which of the following is not a layout manager?",
@@ -353,8 +383,9 @@ const quizQuestionsSet2 = [
             "ColorLayout",
             "GridLayout"
         ],
-        correctAnswer: 3, // D
-        marks: 2
+        correctAnswer: 2, // C
+        marks: 2,
+        explanation: "ColorLayout is not a valid layout manager. BorderLayout, FlowLayout, and GridLayout are standard layout managers."
     },
     {
         question: "Q32. Which event is triggered by clicking a button?",
@@ -364,19 +395,21 @@ const quizQuestionsSet2 = [
             "MouseEvent",
             "WindowEvent"
         ],
-        correctAnswer: 1, // B
-        marks: 2
+        correctAnswer: 0, // A
+        marks: 2,
+        explanation: "ActionEvent is generated when a button is clicked or an action is performed."
     },
     {
-        question: "Q33. In Swing, the top-level container is â€”",
+        question: "Q33. In Swing, the top-level container is -",
         options: [
             "JPanel",
             "JFrame",
             "JButton",
             "JLabel"
         ],
-        correctAnswer: 0, // A
-        marks: 2
+        correctAnswer: 1, // B
+        marks: 2,
+        explanation: "JFrame is the main top-level container in Swing that holds all other components."
     },
     {
         question: "Q34. What is the output?\nJButton b = new JButton(\"Click\");\nb.setText(\"Press\");\nSystem.out.println(b.getText());",
@@ -386,8 +419,9 @@ const quizQuestionsSet2 = [
             "ClickPress",
             "null"
         ],
-        correctAnswer: 2, // C
-        marks: 2
+        correctAnswer: 1, // B
+        marks: 2,
+        explanation: "setText() replaces the button's text. The output is 'Press'."
     },
     
     // ðŸŒ Networking (4 Qs)
@@ -400,7 +434,8 @@ const quizQuestionsSet2 = [
             "URLConnection"
         ],
         correctAnswer: 1, // B
-        marks: 2
+        marks: 2,
+        explanation: "Socket class is used to create TCP client connections."
     },
     {
         question: "Q36. Which package provides networking classes?",
@@ -411,7 +446,8 @@ const quizQuestionsSet2 = [
             "java.util"
         ],
         correctAnswer: 0, // A
-        marks: 2
+        marks: 2,
+        explanation: "The java.net package contains classes for networking operations like Socket, ServerSocket, URL, etc."
     },
     {
         question: "Q37. Which method returns the IP address of a host?",
@@ -422,7 +458,8 @@ const quizQuestionsSet2 = [
             "getAddress()"
         ],
         correctAnswer: 0, // A
-        marks: 2
+        marks: 2,
+        explanation: "getHostAddress() returns the IP address string in textual format."
     },
     {
         question: "Q38. What will InetAddress.getLocalHost() return?",
@@ -433,20 +470,22 @@ const quizQuestionsSet2 = [
             "None"
         ],
         correctAnswer: 0, // A
-        marks: 2
+        marks: 2,
+        explanation: "getLocalHost() returns an InetAddress object containing the hostname and IP address of the local machine."
     },
     
     // ðŸŸ¦ Weeks 11â€“12 (JDBC, Interfaces, Packages â€“ 7 Qs)
     {
-        question: "Q39. JDBC stands for â€”",
+        question: "Q39. JDBC stands for -",
         options: [
             "Java Database Connectivity",
             "Java Data Bridge Connection",
             "Java Database Communication",
             "Java Data Base Converter"
         ],
-        correctAnswer: 2, // C
-        marks: 2
+        correctAnswer: 0, // A
+        marks: 2,
+        explanation: "JDBC stands for Java Database Connectivity, which provides API for database operations."
     },
     {
         question: "Q40. Which class is used to execute SQL queries?",
@@ -456,19 +495,21 @@ const quizQuestionsSet2 = [
             "DriverManager",
             "ResultSet"
         ],
-        correctAnswer: 1, // B
-        marks: 2
+        correctAnswer: 0, // A
+        marks: 2,
+        explanation: "Statement interface is used to execute SQL queries and update statements."
     },
     {
-        question: "Q41. ResultSet rs = st.executeQuery(\"SELECT * FROM student\");\nrs will contain â€”",
+        question: "Q41. ResultSet rs = st.executeQuery(\"SELECT * FROM student\");\nrs will contain -",
         options: [
             "Number of rows affected",
             "Query result table",
             "Boolean",
             "None"
         ],
-        correctAnswer: 3, // D
-        marks: 2
+        correctAnswer: 1, // B
+        marks: 2,
+        explanation: "executeQuery() returns a ResultSet object containing the query result table."
     },
     {
         question: "Q42. Which keyword is used to implement an interface?",
@@ -479,7 +520,8 @@ const quizQuestionsSet2 = [
             "override"
         ],
         correctAnswer: 2, // C
-        marks: 2
+        marks: 2,
+        explanation: "The 'implements' keyword is used when a class wants to implement an interface."
     },
     {
         question: "Q43. What is the output?\ninterface A { int x = 5; }\nclass B implements A {\n   public static void main(String[] args) {\n      System.out.println(x * 2);\n   }\n}",
@@ -489,22 +531,24 @@ const quizQuestionsSet2 = [
             "Compilation error",
             "0"
         ],
-        correctAnswer: 0, // A
-        marks: 2
+        correctAnswer: 1, // B
+        marks: 2,
+        explanation: "Interface variable x is accessible in the implementing class. Output is 5 * 2 = 10."
     },
     {
-        question: "Q44. Packages are used to â€”",
+        question: "Q44. Packages are used to -",
         options: [
             "Organize classes",
             "Create new data types",
             "Control access",
             "Handle exceptions"
         ],
-        correctAnswer: 3, // D
-        marks: 2
+        correctAnswer: 0, // A
+        marks: 2,
+        explanation: "Packages are used to organize related classes and interfaces, providing namespace management and access control."
     },
     {
-        question: "Q45. Default package access means the class is visible â€”",
+        question: "Q45. Default package access means the class is visible -",
         options: [
             "Only within the same class",
             "Within same package",
@@ -512,7 +556,8 @@ const quizQuestionsSet2 = [
             "Nowhere"
         ],
         correctAnswer: 1, // B
-        marks: 2
+        marks: 2,
+        explanation: "Default (package-private) access means the class is accessible only within the same package."
     },
     
     // ðŸ§© Integrated Mixed (5 Qs)
@@ -524,8 +569,9 @@ const quizQuestionsSet2 = [
             "XYZ",
             "ZYX"
         ],
-        correctAnswer: 3, // D
-        marks: 2
+        correctAnswer: 0, // A
+        marks: 2,
+        explanation: "Constructors execute from parent to child: X constructor first, then Y, then Z. Output: 'X Y Z'."
     },
     {
         question: "Q47. What is the output?\nString s1 = \"Java\";\nString s2 = new String(\"Java\");\nSystem.out.println(s1.equals(s2));\nSystem.out.println(s1 == s2);",
@@ -536,7 +582,8 @@ const quizQuestionsSet2 = [
             "false\nfalse"
         ],
         correctAnswer: 1, // B
-        marks: 2
+        marks: 2,
+        explanation: "equals() compares content (true), == compares references (false - different objects)."
     },
     {
         question: "Q48. What is the output?\nint a = 5; int b = 5;\nSystem.out.println(a == b);\nInteger x = new Integer(5); Integer y = new Integer(5);\nSystem.out.println(x == y);",
@@ -546,8 +593,9 @@ const quizQuestionsSet2 = [
             "false\ntrue",
             "false\nfalse"
         ],
-        correctAnswer: 0, // A
-        marks: 2
+        correctAnswer: 1, // B
+        marks: 2,
+        explanation: "Primitives a==b is true (value comparison). Integer objects x==y is false (different object references)."
     },
     {
         question: "Q49. Which modifiers can be applied to a class? (Select multiple)",
@@ -559,7 +607,8 @@ const quizQuestionsSet2 = [
         ],
         correctAnswer: [0, 1, 3], // A, B, D
         marks: 2,
-        multipleAnswers: true
+        multipleAnswers: true,
+        explanation: "Top-level classes can have public, abstract, and final modifiers. Private is only for nested classes."
     },
     {
         question: "Q50. What is the output?\ntry {\n   System.out.println(\"Try\");\n   System.exit(0);\n} finally {\n   System.out.println(\"Finally\");\n}",
@@ -570,7 +619,8 @@ const quizQuestionsSet2 = [
             "Compilation error"
         ],
         correctAnswer: 1, // B
-        marks: 2
+        marks: 2,
+        explanation: "System.exit(0) terminates the JVM immediately. Finally block doesn't execute when System.exit() is called."
     }
 ];
 
