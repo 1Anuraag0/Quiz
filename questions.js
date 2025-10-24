@@ -185,7 +185,7 @@ const quizQuestionsSet2 = [
         marks: 2
     },
     {
-        question: "Q17. finally block executes â€"",
+        question: "Q17. finally block executes -",
         options: [
             "Only if exception is thrown",
             "Only if exception is not thrown",
