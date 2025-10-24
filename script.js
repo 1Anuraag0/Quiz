@@ -14,8 +14,159 @@ class QuizApp {
         this.startTime = null;
         this.elapsedTime = 0;
         
+        // Streak and stats tracking
+        this.streak = 0;
+        this.maxStreak = 0;
+        this.correctCount = 0;
+        this.wrongCount = 0;
+        
         this.initializeElements();
         this.attachEventListeners();
+        this.initializeSounds();
+        this.createStreakDisplay();
+    }
+    
+    initializeSounds() {
+        // Using Web Audio API for open-source sound generation
+        this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        this.soundEnabled = true;
+    }
+    
+    playCorrectSound() {
+        if (!this.soundEnabled) return;
+        const oscillator = this.audioContext.createOscillator();
+        const gainNode = this.audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(this.audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(523.25, this.audioContext.currentTime); // C5
+        oscillator.frequency.setValueAtTime(659.25, this.audioContext.currentTime + 0.1); // E5
+        oscillator.frequency.setValueAtTime(783.99, this.audioContext.currentTime + 0.2); // G5
+        
+        gainNode.gain.setValueAtTime(0.3, this.audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 0.3);
+        
+        oscillator.start(this.audioContext.currentTime);
+        oscillator.stop(this.audioContext.currentTime + 0.3);
+    }
+    
+    playWrongSound() {
+        if (!this.soundEnabled) return;
+        const oscillator = this.audioContext.createOscillator();
+        const gainNode = this.audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(this.audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(200, this.audioContext.currentTime);
+        oscillator.frequency.setValueAtTime(150, this.audioContext.currentTime + 0.15);
+        
+        gainNode.gain.setValueAtTime(0.3, this.audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 0.3);
+        
+        oscillator.start(this.audioContext.currentTime);
+        oscillator.stop(this.audioContext.currentTime + 0.3);
+    }
+    
+    playStreakSound() {
+        if (!this.soundEnabled) return;
+        const oscillator = this.audioContext.createOscillator();
+        const gainNode = this.audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(this.audioContext.destination);
+        
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(880, this.audioContext.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(1760, this.audioContext.currentTime + 0.2);
+        
+        gainNode.gain.setValueAtTime(0.4, this.audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 0.4);
+        
+        oscillator.start(this.audioContext.currentTime);
+        oscillator.stop(this.audioContext.currentTime + 0.4);
+    }
+    
+    createStreakDisplay() {
+        // Create streak container if it doesn't exist
+        if (document.getElementById('streak-container')) return;
+        
+        const streakContainer = document.createElement('div');
+        streakContainer.id = 'streak-container';
+        streakContainer.className = 'streak-container';
+        streakContainer.style.display = 'none';
+        streakContainer.innerHTML = `
+            <div class="streak-badge">
+                <span class="streak-icon">🔥</span>
+                <span class="streak-count">0</span>
+            </div>
+            <div class="stats-mini">
+                <span class="correct-mini">✓ <span id="correct-count">0</span></span>
+                <span class="wrong-mini">✗ <span id="wrong-count">0</span></span>
+            </div>
+        `;
+        document.body.appendChild(streakContainer);
+        
+        this.streakContainer = streakContainer;
+        this.streakCount = document.querySelector('.streak-count');
+        this.correctCountDisplay = document.getElementById('correct-count');
+        this.wrongCountDisplay = document.getElementById('wrong-count');
+    }
+    
+    updateStreakDisplay() {
+        if (!this.streakCount) return;
+        
+        this.streakCount.textContent = this.streak;
+        this.correctCountDisplay.textContent = this.correctCount;
+        this.wrongCountDisplay.textContent = this.wrongCount;
+        
+        const streakBadge = document.querySelector('.streak-badge');
+        if (this.streak >= 5) {
+            streakBadge.classList.add('on-fire');
+        } else {
+            streakBadge.classList.remove('on-fire');
+        }
+    }
+    
+    showFeedbackAnimation(type) {
+        const feedback = document.createElement('div');
+        feedback.className = `feedback-overlay ${type}`;
+        feedback.innerHTML = type === 'correct' 
+            ? '<div class="feedback-icon">✓</div><div class="feedback-text">Correct!</div>'
+            : '<div class="feedback-icon">✗</div><div class="feedback-text">Wrong!</div>';
+        
+        document.body.appendChild(feedback);
+        
+        setTimeout(() => {
+            feedback.classList.add('show');
+        }, 10);
+        
+        setTimeout(() => {
+            feedback.classList.remove('show');
+            setTimeout(() => feedback.remove(), 300);
+        }, 1000);
+    }
+    
+    showStreakMilestone() {
+        const milestone = document.createElement('div');
+        milestone.className = 'streak-milestone';
+        milestone.innerHTML = `
+            <div class="milestone-icon">🔥</div>
+            <div class="milestone-text">${this.streak} Streak!</div>
+            <div class="milestone-subtitle">You're on fire!</div>
+        `;
+        
+        document.body.appendChild(milestone);
+        
+        setTimeout(() => {
+            milestone.classList.add('show');
+        }, 10);
+        
+        setTimeout(() => {
+            milestone.classList.remove('show');
+            setTimeout(() => milestone.remove(), 500);
+        }, 2000);
     }
 
     initializeElements() {
@@ -94,7 +245,18 @@ class QuizApp {
         this.currentQuestionIndex = 0;
         this.userAnswers = new Array(this.questions.length).fill(null);
         this.score = 0;
+        this.streak = 0;
+        this.maxStreak = 0;
+        this.correctCount = 0;
+        this.wrongCount = 0;
         this.startTime = Date.now();
+        
+        // Show streak display
+        if (this.streakContainer) {
+            this.streakContainer.style.display = 'flex';
+            this.updateStreakDisplay();
+        }
+        
         this.startTimer();
         this.displayQuestion();
     }
@@ -207,6 +369,31 @@ class QuizApp {
             
             this.userAnswers[this.currentQuestionIndex] = answerIndex;
             const correctAnswer = question.correctAnswer;
+            const isCorrect = answerIndex === correctAnswer;
+            
+            // Update streak
+            if (isCorrect) {
+                this.streak++;
+                this.correctCount++;
+                if (this.streak > this.maxStreak) {
+                    this.maxStreak = this.streak;
+                }
+                this.playCorrectSound();
+                this.showFeedbackAnimation('correct');
+                
+                // Streak milestone sound
+                if (this.streak % 5 === 0 && this.streak > 0) {
+                    setTimeout(() => this.playStreakSound(), 300);
+                    this.showStreakMilestone();
+                }
+            } else {
+                this.streak = 0;
+                this.wrongCount++;
+                this.playWrongSound();
+                this.showFeedbackAnimation('wrong');
+            }
+            
+            this.updateStreakDisplay();
             
             // Update UI to show instant feedback
             const options = this.answerOptions.querySelectorAll('.answer-option');
@@ -228,6 +415,59 @@ class QuizApp {
                 }
             });
         }
+    }
+    
+    updateStreakDisplay() {
+        this.streakCount.textContent = this.streak;
+        this.correctCountDisplay.textContent = this.correctCount;
+        this.wrongCountDisplay.textContent = this.wrongCount;
+        
+        const streakBadge = document.querySelector('.streak-badge');
+        if (this.streak >= 5) {
+            streakBadge.classList.add('on-fire');
+        } else {
+            streakBadge.classList.remove('on-fire');
+        }
+    }
+    
+    showFeedbackAnimation(type) {
+        const feedback = document.createElement('div');
+        feedback.className = `feedback-overlay ${type}`;
+        feedback.innerHTML = type === 'correct' 
+            ? '<div class="feedback-icon">✓</div><div class="feedback-text">Correct!</div>'
+            : '<div class="feedback-icon">✗</div><div class="feedback-text">Wrong!</div>';
+        
+        document.body.appendChild(feedback);
+        
+        setTimeout(() => {
+            feedback.classList.add('show');
+        }, 10);
+        
+        setTimeout(() => {
+            feedback.classList.remove('show');
+            setTimeout(() => feedback.remove(), 300);
+        }, 1000);
+    }
+    
+    showStreakMilestone() {
+        const milestone = document.createElement('div');
+        milestone.className = 'streak-milestone';
+        milestone.innerHTML = `
+            <div class="milestone-icon">🔥</div>
+            <div class="milestone-text">${this.streak} Streak!</div>
+            <div class="milestone-subtitle">You're on fire!</div>
+        `;
+        
+        document.body.appendChild(milestone);
+        
+        setTimeout(() => {
+            milestone.classList.add('show');
+        }, 10);
+        
+        setTimeout(() => {
+            milestone.classList.remove('show');
+            setTimeout(() => milestone.remove(), 500);
+        }, 2000);
     }
 
     previousQuestion() {
@@ -312,23 +552,68 @@ class QuizApp {
         
         // Calculate percentage based on marks
         const percentage = Math.round((this.score / this.totalMarks) * 100);
-        this.scorePercentage.textContent = `${percentage}%`;
-        this.scoreText.textContent = `Your Score: ${this.score}/${this.totalMarks} marks`;
+        
+        // Hide streak display
+        if (this.streakContainer) {
+            this.streakContainer.style.display = 'none';
+        }
+        
+        // Animate score
+        this.animateScore(percentage);
+        
+        // Display detailed stats
+        const statsHTML = `
+            <div class="result-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">✓</div>
+                    <div class="stat-value">${this.correctCount}</div>
+                    <div class="stat-label">Correct</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✗</div>
+                    <div class="stat-value">${this.wrongCount}</div>
+                    <div class="stat-label">Wrong</div>
+                </div>
+                <div class="stat-card fire">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-value">${this.maxStreak}</div>
+                    <div class="stat-label">Best Streak</div>
+                </div>
+            </div>
+        `;
+        
+        // Insert stats
+        const existingStats = document.querySelector('.result-stats');
+        if (existingStats) {
+            existingStats.remove();
+        }
+        this.performanceMessage.insertAdjacentHTML('beforebegin', statsHTML);
         
         // Performance message
         let message = '';
+        let emoji = '';
         if (percentage >= 90) {
-            message = 'Outstanding! You\'re a quiz master! 🌟';
+            message = 'Outstanding! You\'re a quiz master!';
+            emoji = '🌟';
         } else if (percentage >= 75) {
-            message = 'Excellent! Great performance! 🎉';
+            message = 'Excellent! Great performance!';
+            emoji = '🎉';
         } else if (percentage >= 60) {
-            message = 'Good job! Well done! 👍';
+            message = 'Good job! Well done!';
+            emoji = '👍';
         } else if (percentage >= 40) {
-            message = 'Fair attempt! Keep practicing! �';
+            message = 'Fair attempt! Keep practicing!';
+            emoji = '📚';
         } else {
-            message = 'Don\'t give up! Study and try again! 💪';
+            message = 'Don\'t give up! Study and try again!';
+            emoji = '💪';
         }
-        this.performanceMessage.textContent = message;
+        this.performanceMessage.innerHTML = `${emoji} ${message}`;
+        
+        // Add confetti for high scores
+        if (percentage >= 75) {
+            setTimeout(() => this.showConfetti(), 500);
+        }
         
         // Display detailed results
         this.displayDetailedResults();
@@ -363,11 +648,65 @@ class QuizApp {
         });
     }
 
+    animateScore(targetPercentage) {
+        let currentPercentage = 0;
+        const increment = targetPercentage / 50;
+        const duration = 2000;
+        const stepTime = duration / 50;
+        
+        this.scorePercentage.textContent = '0%';
+        this.scoreText.textContent = `Your Score: 0/${this.totalMarks} marks`;
+        
+        const timer = setInterval(() => {
+            currentPercentage += increment;
+            if (currentPercentage >= targetPercentage) {
+                currentPercentage = targetPercentage;
+                clearInterval(timer);
+            }
+            
+            const displayPercentage = Math.round(currentPercentage);
+            const displayScore = Math.round((currentPercentage / 100) * this.totalMarks);
+            
+            this.scorePercentage.textContent = `${displayPercentage}%`;
+            this.scoreText.textContent = `Your Score: ${displayScore}/${this.totalMarks} marks`;
+        }, stepTime);
+    }
+    
+    showConfetti() {
+        const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+        const confettiCount = 50;
+        
+        for (let i = 0; i < confettiCount; i++) {
+            setTimeout(() => {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 5000);
+            }, i * 30);
+        }
+    }
+    
     restartQuiz() {
         this.currentQuestionIndex = 0;
         this.userAnswers = [];
         this.score = 0;
         this.elapsedTime = 0;
+        this.streak = 0;
+        this.maxStreak = 0;
+        this.correctCount = 0;
+        this.wrongCount = 0;
+        
+        // Remove any existing stats
+        const existingStats = document.querySelector('.result-stats');
+        if (existingStats) {
+            existingStats.remove();
+        }
+        
         this.showSetSelection();
     }
 
