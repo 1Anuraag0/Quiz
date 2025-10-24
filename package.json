@@ -1,0 +1,18 @@
+{
+  "name": "java-quiz-platform",
+  "version": "1.0.0",
+  "description": "Interactive Java Quiz Platform with multiple question sets",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve .",
+    "dev": "serve ."
+  },
+  "keywords": [
+    "quiz",
+    "java",
+    "education",
+    "interactive"
+  ],
+  "author": "",
+  "license": "MIT"
+}
